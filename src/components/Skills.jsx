@@ -35,22 +35,22 @@ const Skills = () => {
     {
       title: "Frontend",
       icon: Code,
-      skills: ["React", "Vue.js", "Next.js", "Tailwind CSS", "Framer Motion", "TypeScript", "Redux"]
+      skills: ["React", "Next.js", "Tailwind CSS", "HTML", "CSS", "JavaScript"]
     },
     {
       title: "Backend",
       icon: Server,
-      skills: ["Node.js", "Express", "Python", "Django", "PostgreSQL", "MongoDB", "Redis"]
+      skills: ["Node.js", "Python", "PostgreSQL"]
     },
     {
       title: "Data Science",
       icon: Terminal,
-      skills: ["Pandas", "NumPy", "Scikit-learn", "TensorFlow", "PyTorch", "Matplotlib", "Jupyter"]
+      skills: ["Pandas", "NumPy", "Scikit-learn", "TensorFlow", "Matplotlib", "Jupyter"]
     },
     {
       title: "Tools & Design",
       icon: PenTool,
-      skills: ["Git", "Docker", "AWS", "Figma", "Adobe XD", "Linux", "CI/CD"]
+      skills: ["Git", "Figma", "PowerBI", "Tableau"]
     }
   ];
 
