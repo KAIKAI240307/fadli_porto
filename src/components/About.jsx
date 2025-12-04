@@ -72,7 +72,7 @@ const About = () => {
                             <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-slate-900 bg-slate-800">
                                 {/* Placeholder for Profile Image - Replace with actual image */}
                                 <img 
-                                    src="./src/assets/profile.jpg" 
+                                    src="/images/projects/profile.jpg" 
                                     alt="Profile" 
                                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                                 />
