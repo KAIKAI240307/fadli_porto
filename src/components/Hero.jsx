@@ -1,54 +1,39 @@
 import React, { useEffect, useRef } from 'react';
-import { ArrowDown } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const Hero = () => {
   const containerRef = useRef(null);
-  const titleRef = useRef(null);
-  const subtitleRef = useRef(null);
-  const buttonRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
+      // Set initial state
+      gsap.set(".hero-text", { y: 60, opacity: 0 });
+      gsap.set(".hero-subtitle", { y: 30, opacity: 0 });
+      
+      gsap.to(".hero-text", {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.5,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 60%",
+          start: "top 80%",
           toggleActions: "play reverse play reverse",
         }
-      });
-
-      tl.from(titleRef.current, {
-        y: 100,
-        opacity: 0,
-        duration: 1,
-        ease: "power4.out",
-        skewY: 7,
       })
-      .from(subtitleRef.current, {
-        y: 50,
-        opacity: 0,
+      gsap.to(".hero-subtitle", {
+        y: 0,
+        opacity: 1,
         duration: 1,
-        ease: "power3.out",
-      }, "-=0.5")
-      .from(buttonRef.current, {
-        scale: 0.8,
-        opacity: 0,
-        duration: 0.5,
-        ease: "back.out(1.7)",
-      }, "-=0.5");
-
-      // Parallax effect on scroll
-      gsap.to(titleRef.current, {
-        yPercent: 50,
-        ease: "none",
+        stagger: 0.5,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
+          start: "top 80%",
+          toggleActions: "play reverse play reverse",
+        }
       });
     }, containerRef);
 
@@ -56,46 +41,38 @@ const Hero = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Gradient Mesh */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-neon/10 blur-[120px]" />
-        <div className="absolute top-[40%] -right-[10%] w-[40%] h-[40%] rounded-full bg-purple-500/10 blur-[120px]" />
-        <div className="absolute -bottom-[20%] left-[20%] w-[30%] h-[30%] rounded-full bg-blue-500/10 blur-[120px]" />
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-        <div className="overflow-hidden mb-6">
-          <h1
-            ref={titleRef}
-            className="text-6xl md:text-8xl lg:text-9xl font-display font-bold text-white tracking-tighter"
-          >
-            akai<span className="text-neon">.</span>
+    <section 
+      ref={containerRef} 
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#faf8f5]"
+    >
+      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-16 py-32">
+        {/* Main headline */}
+        <div className="mb-8">
+          <h1 className="hero-text text-4xl md:text-6xl lg:text-7xl font-display font-medium text-stone-900 leading-tight max-w-4xl">
+            Data Analyst, Data Scientist, and Machine Learning Engineer based in Jakarta.
           </h1>
         </div>
 
-        <div ref={subtitleRef} className="text-xl md:text-2xl text-slate-400 max-w-2xl mx-auto mb-12">
-          <p>Data Analyst, Data Scientist &</p>
-          <p className="text-white font-medium mt-2">Machine Learning Engineer</p>
-        </div>
-
-        <div ref={buttonRef}>
+        {/* Subtitle */}
+        <div className="hero-subtitle flex flex-col md:flex-row md:items-center md:justify-between gap-6 mt-12">
+          <p className="text-stone-500 text-lg md:text-xl max-w-xl leading-relaxed">
+            Turning complex data into actionable insights. Bridging the gap between raw data and meaningful solutions.
+          </p>
+          
           <a
             href="#works"
-            className="inline-block px-8 py-4 bg-neon text-slate-950 font-bold rounded-full hover:scale-105 transition-transform duration-300"
+            className="inline-flex items-center gap-3 text-stone-900 hover:text-stone-600 transition-colors group"
           >
-            View My Work
+            <span className="text-sm uppercase tracking-widest">View Works</span>
+            <svg 
+              className="w-5 h-5 transform group-hover:translate-x-2 transition-transform" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
           </a>
-        </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-      >
-        <span className="text-xs text-slate-500 uppercase tracking-widest">Scroll</span>
-        <div className="animate-bounce">
-          <ArrowDown className="text-neon" size={20} />
         </div>
       </div>
     </section>

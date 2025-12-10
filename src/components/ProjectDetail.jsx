@@ -16,23 +16,19 @@ const ProjectDetail = () => {
     const headerRef = useRef(null);
     const contentRef = useRef(null);
 
-    // State untuk image lightbox
     const [selectedImage, setSelectedImage] = useState(null);
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
-    // Function untuk buka lightbox
     const openLightbox = (imageUrl) => {
         setSelectedImage(imageUrl);
         setIsLightboxOpen(true);
     };
 
-    // Function untuk tutup lightbox
     const closeLightbox = () => {
         setIsLightboxOpen(false);
         setSelectedImage(null);
     };
 
-    // Effect untuk manage body scroll ketika lightbox buka/tutup
     useEffect(() => {
         if (isLightboxOpen) {
             document.body.style.overflow = 'hidden';
@@ -48,21 +44,24 @@ const ProjectDetail = () => {
         window.scrollTo(0, 0);
 
         const ctx = gsap.context(() => {
-            // Header animation
-            gsap.from(headerRef.current, {
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out"
+            gsap.set(".detail-animate", { y: 40, opacity: 0 });
+            
+            gsap.to(".detail-animate", {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: "power2.out",
             });
 
-            // Content sections animation
-            gsap.from(".detail-section", {
-                y: 100,
-                opacity: 0,
-                duration: 0.8,
-                stagger: 0.2,
-                ease: "power3.out",
+            gsap.set(".detail-section", { y: 60, opacity: 0 });
+            
+            gsap.to(".detail-section", {
+                y: 0,
+                opacity: 1,
+                duration: 0.6,
+                stagger: 0.15,
+                ease: "power2.out",
                 scrollTrigger: {
                     trigger: contentRef.current,
                     start: "top 80%",
@@ -75,13 +74,13 @@ const ProjectDetail = () => {
 
     if (!project) {
         return (
-            <div className="min-h-screen flex items-center justify-center">
+            <div className="min-h-screen bg-[#faf8f5] flex items-center justify-center">
                 <div className="text-center">
-                    <h2 className="text-3xl font-bold mb-4">Project Not Found</h2>
-                    <p className="text-slate-400 mb-8">The project you're looking for doesn't exist.</p>
+                    <h2 className="text-3xl font-display font-medium text-stone-900 mb-4">Project Not Found</h2>
+                    <p className="text-stone-500 mb-8">The project you're looking for doesn't exist.</p>
                     <button
                         onClick={() => navigate('/')}
-                        className="px-6 py-3 bg-neon text-slate-950 rounded-full font-bold hover:bg-white transition-colors"
+                        className="px-6 py-3 bg-stone-900 text-white rounded-full font-medium hover:bg-stone-700 transition-colors"
                     >
                         Back to Home
                     </button>
@@ -91,105 +90,90 @@ const ProjectDetail = () => {
     }
 
     return (
-        <div className="min-h-screen bg-slate-950 text-white">
-            {/* Back Button */}
-            <div className="fixed top-8 left-8 z-50">
-                <button
-                    onClick={() => navigate(-1)}
-                    className="flex items-center gap-2 px-6 py-3 bg-slate-900/80 backdrop-blur-md border border-slate-800 rounded-full hover:border-neon/50 transition-all duration-300 group"
-                >
-                    <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                    <span className="text-sm font-medium">Back</span>
-                </button>
-            </div>
+        <div className="min-h-screen bg-[#faf8f5] text-stone-900">
+            {/* Navigation Bar */}
+            <nav className="fixed top-0 left-0 right-0 z-50 bg-[#faf8f5]/90 backdrop-blur-md py-4">
+                <div className="max-w-6xl mx-auto px-6 lg:px-16 flex justify-between items-center">
+                    <button
+                        onClick={() => navigate(-1)}
+                        className="flex items-center gap-2 text-stone-600 hover:text-stone-900 transition-colors group"
+                    >
+                        <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+                        <span className="text-sm">Back</span>
+                    </button>
+                    <Link to="/" className="text-xl font-display font-medium">
+                        FadliArdiansyah
+                    </Link>
+                </div>
+            </nav>
 
             {/* Hero Section */}
-            <div ref={headerRef} className="relative pt-32 pb-20 px-6">
-                <div className="max-w-6xl mx-auto">
-                    {/* Category Badge */}
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-neon/10 border border-neon/30 rounded-full mb-6">
-                        <div className="w-2 h-2 bg-neon rounded-full animate-pulse" />
-                        <span className="text-xs font-mono text-neon uppercase tracking-wider">{project.category}</span>
+            <div ref={headerRef} className="pt-32 pb-16 px-6 lg:px-16">
+                <div className="max-w-5xl mx-auto">
+                    {/* Category & Year */}
+                    <div className="detail-animate flex items-center gap-4 mb-8">
+                        <span className="text-stone-400 text-sm">{project.category}</span>
+                        <span className="text-stone-300">•</span>
+                        <span className="text-stone-400 text-sm">{project.year}</span>
                     </div>
 
                     {/* Title */}
-                    <h1 className="text-5xl md:text-7xl font-display font-bold mb-4 leading-tight">
+                    <h1 className="detail-animate text-4xl md:text-5xl lg:text-6xl font-display font-medium text-stone-900 leading-tight mb-6">
                         {project.title}
                     </h1>
-                    <p className="text-2xl md:text-3xl font-script text-neon mb-8">
+                    
+                    <p className="detail-animate text-xl md:text-2xl text-stone-500 mb-12 max-w-3xl">
                         {project.subtitle}
                     </p>
 
-                    {/* Meta Info */}
-                    <div className="flex flex-wrap gap-8 mb-12">
-                        <div>
-                            <span className="text-xs text-slate-500 uppercase tracking-wider block mb-1">Year</span>
-                            <span className="text-lg font-mono text-white">{project.year}</span>
-                        </div>
-                        <div>
-                            <span className="text-xs text-slate-500 uppercase tracking-wider block mb-1">Awards</span>
-                            <span className="text-lg font-bold text-neon">{project.awards}</span>
-                        </div>
-                        <div>
-                            <span className="text-xs text-slate-500 uppercase tracking-wider block mb-1">Technologies</span>
-                            <span className="text-lg text-white">{project.technologies.slice(0, 3).join(', ')}</span>
-                        </div>
-                    </div>
-
                     {/* CTA Buttons */}
-                    <div className="flex flex-wrap gap-4">
-                        {project.liveDemo && (
-                            <a
-                                href={project.liveDemo}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-2 px-8 py-4 bg-neon text-slate-950 rounded-full font-bold hover:bg-white transition-all duration-300 hover:scale-105"
-                            >
-                                <ExternalLink className="w-5 h-5" />
-                                View Live Demo
-                            </a>
-                        )}
+                    <div className="detail-animate flex flex-wrap gap-4">
                         {project.github && (
                             <a
                                 href={project.github}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-2 px-8 py-4 border border-slate-700 rounded-full font-bold hover:border-neon hover:bg-neon/10 transition-all duration-300"
+                                className="flex items-center gap-2 px-6 py-3 bg-stone-900 text-white rounded-full text-sm hover:bg-stone-700 transition-colors"
                             >
-                                <Github className="w-5 h-5" />
+                                <Github className="w-4 h-4" />
                                 View Source
+                            </a>
+                        )}
+                        {project.liveDemo && (
+                            <a
+                                href={project.liveDemo}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 px-6 py-3 border border-stone-300 text-stone-700 rounded-full text-sm hover:border-stone-900 transition-colors"
+                            >
+                                <ExternalLink className="w-4 h-4" />
+                                Live Demo
                             </a>
                         )}
                     </div>
                 </div>
             </div>
 
-            {/* Main Image/Gallery */}
-            <div className="px-6 mb-20">
+            {/* Main Image Gallery */}
+            <div className="px-6 lg:px-16 mb-20">
                 <div className="max-w-6xl mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {project.images.map((img, idx) => (
                             <div
                                 key={idx}
                                 onClick={() => openLightbox(img)}
-                                className={`${idx === 0 ? 'md:col-span-2' : ''} h-96 rounded-3xl border border-slate-800 overflow-hidden relative group cursor-pointer hover:border-neon/50 transition-all duration-300`}
+                                className={`${idx === 0 ? 'md:col-span-2' : ''} aspect-video rounded-2xl overflow-hidden relative group cursor-pointer bg-stone-200`}
                             >
                                 <img
                                     src={img}
                                     alt={`${project.title} screenshot ${idx + 1}`}
-                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-50 group-hover:opacity-30 transition-opacity" />
-                                
-                                {/* Zoom Icon Overlay */}
-                                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <div className="w-16 h-16 rounded-full bg-neon/90 flex items-center justify-center backdrop-blur-sm">
-                                        <ZoomIn className="w-8 h-8 text-slate-950" />
+                                {/* Hover Overlay */}
+                                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                                    <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <ZoomIn className="w-5 h-5 text-stone-900" />
                                     </div>
-                                </div>
-                                
-                                <div className="absolute bottom-6 left-6">
-                                    <span className="text-xs text-slate-400 font-mono">Screenshot {idx + 1} - Klik untuk Perbesar</span>
                                 </div>
                             </div>
                         ))}
@@ -198,35 +182,28 @@ const ProjectDetail = () => {
             </div>
 
             {/* Content Sections */}
-            <div ref={contentRef} className="px-6 pb-20">
+            <div ref={contentRef} className="px-6 lg:px-16 pb-24">
                 <div className="max-w-4xl mx-auto space-y-20">
 
                     {/* Overview */}
                     <section className="detail-section">
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="w-12 h-12 rounded-full bg-neon/10 flex items-center justify-center">
-                                <Target className="w-6 h-6 text-neon" />
-                            </div>
-                            <h2 className="text-3xl font-display font-bold">Project Overview</h2>
-                        </div>
-                        <p className="text-lg text-slate-300 leading-relaxed">
+                        <p className="text-stone-400 text-sm uppercase tracking-widest mb-4">Overview</p>
+                        <p className="text-lg md:text-xl text-stone-700 leading-relaxed">
                             {project.detailedDescription}
                         </p>
                     </section>
 
+                    {/* Divider */}
+                    <div className="w-full h-px bg-stone-200" />
+
                     {/* Technologies */}
                     <section className="detail-section">
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="w-12 h-12 rounded-full bg-neon/10 flex items-center justify-center">
-                                <Zap className="w-6 h-6 text-neon" />
-                            </div>
-                            <h2 className="text-3xl font-display font-bold">Technologies Used</h2>
-                        </div>
+                        <p className="text-stone-400 text-sm uppercase tracking-widest mb-6">Technologies</p>
                         <div className="flex flex-wrap gap-3">
                             {project.technologies.map((tech, idx) => (
                                 <span
                                     key={idx}
-                                    className="px-6 py-3 bg-slate-900 border border-slate-800 rounded-full text-sm font-medium hover:border-neon/50 transition-colors"
+                                    className="px-4 py-2 bg-stone-100 border border-stone-200 rounded-full text-sm text-stone-700"
                                 >
                                     {tech}
                                 </span>
@@ -234,89 +211,91 @@ const ProjectDetail = () => {
                         </div>
                     </section>
 
+                    {/* Divider */}
+                    <div className="w-full h-px bg-stone-200" />
+
                     {/* Features */}
                     <section className="detail-section">
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="w-12 h-12 rounded-full bg-neon/10 flex items-center justify-center">
-                                <CheckCircle className="w-6 h-6 text-neon" />
-                            </div>
-                            <h2 className="text-3xl font-display font-bold">Key Features</h2>
-                        </div>
+                        <p className="text-stone-400 text-sm uppercase tracking-widest mb-6">Key Features</p>
                         <div className="grid md:grid-cols-2 gap-4">
                             {project.features.map((feature, idx) => (
                                 <div
                                     key={idx}
-                                    className="flex items-start gap-3 p-4 bg-slate-900/50 border border-slate-800 rounded-xl hover:border-neon/30 transition-colors"
+                                    className="flex items-start gap-3 p-4 bg-stone-50 border border-stone-100 rounded-xl"
                                 >
-                                    <CheckCircle className="w-5 h-5 text-neon mt-0.5 flex-shrink-0" />
-                                    <span className="text-slate-300">{feature}</span>
+                                    <CheckCircle className="w-5 h-5 text-stone-400 mt-0.5 flex-shrink-0" />
+                                    <span className="text-stone-700">{feature}</span>
                                 </div>
                             ))}
                         </div>
                     </section>
 
-                    {/* Challenges & Solutions */}
-                    <section className="detail-section">
-                        <h2 className="text-3xl font-display font-bold mb-6">Challenges</h2>
-                        <div className="space-y-4">
-                            {project.challenges.map((challenge, idx) => (
-                                <div
-                                    key={idx}
-                                    className="p-6 bg-gradient-to-r from-slate-900/50 to-transparent border-l-4 border-neon rounded-r-xl"
-                                >
-                                    <p className="text-slate-300">{challenge}</p>
+                    {/* Challenges */}
+                    {project.challenges && project.challenges.length > 0 && (
+                        <>
+                            <div className="w-full h-px bg-stone-200" />
+                            <section className="detail-section">
+                                <p className="text-stone-400 text-sm uppercase tracking-widest mb-6">Challenges</p>
+                                <div className="space-y-4">
+                                    {project.challenges.map((challenge, idx) => (
+                                        <div
+                                            key={idx}
+                                            className="p-6 bg-stone-50 border-l-2 border-stone-300 rounded-r-xl"
+                                        >
+                                            <p className="text-stone-700">{challenge}</p>
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
-                        </div>
-                    </section>
+                            </section>
+                        </>
+                    )}
 
                     {/* Results */}
-                    <section className="detail-section">
-                        <h2 className="text-3xl font-display font-bold mb-6">Results & Impact</h2>
-                        <div className="grid md:grid-cols-3 gap-6">
-                            {project.results.map((result, idx) => (
-                                <div
-                                    key={idx}
-                                    className="p-6 bg-slate-900 border border-slate-800 rounded-2xl text-center hover:border-neon/50 transition-colors"
-                                >
-                                    <div className="text-3xl font-bold text-neon mb-2">✓</div>
-                                    <p className="text-slate-300">{result}</p>
+                    {project.results && project.results.length > 0 && (
+                        <>
+                            <div className="w-full h-px bg-stone-200" />
+                            <section className="detail-section">
+                                <p className="text-stone-400 text-sm uppercase tracking-widest mb-6">Results</p>
+                                <div className="grid md:grid-cols-3 gap-4">
+                                    {project.results.map((result, idx) => (
+                                        <div
+                                            key={idx}
+                                            className="p-6 bg-stone-50 border border-stone-100 rounded-xl text-center"
+                                        >
+                                            <div className="text-2xl text-stone-400 mb-3">✓</div>
+                                            <p className="text-stone-700 text-sm">{result}</p>
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
-                        </div>
-                    </section>
-
+                            </section>
+                        </>
+                    )}
                 </div>
             </div>
 
             {/* Related Projects */}
             {relatedProjects.length > 0 && (
-                <div className="px-6 py-20 border-t border-slate-900">
+                <div className="px-6 lg:px-16 py-20 border-t border-stone-200">
                     <div className="max-w-6xl mx-auto">
-                        <h2 className="text-3xl font-display font-bold mb-12">Related Projects</h2>
-                        <div className="grid md:grid-cols-3 gap-8">
+                        <p className="text-stone-400 text-sm uppercase tracking-widest mb-8">Related Projects</p>
+                        <div className="grid md:grid-cols-3 gap-6">
                             {relatedProjects.map((relProject) => (
                                 <Link
                                     key={relProject.id}
                                     to={`/project/${relProject.id}`}
-                                    className="group bg-slate-900/50 border border-slate-800 rounded-2xl overflow-hidden hover:border-neon/50 transition-all duration-300 hover:scale-105"
+                                    className="group"
                                 >
-                                    <div className="h-48 relative">
+                                    <div className="aspect-video rounded-xl overflow-hidden bg-stone-200 mb-4">
                                         <img
                                             src={relProject.image}
                                             alt={relProject.title}
-                                            className="w-full h-full object-cover"
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-70" />
                                     </div>
-                                    <div className="p-6">
-                                        <h3 className="text-xl font-bold mb-2 group-hover:text-neon transition-colors">
-                                            {relProject.title}
-                                        </h3>
-                                        <p className="text-sm text-slate-400 line-clamp-2">
-                                            {relProject.description}
-                                        </p>
-                                    </div>
+                                    <h3 className="text-lg font-display font-medium text-stone-900 group-hover:text-stone-600 transition-colors">
+                                        {relProject.title}
+                                    </h3>
+                                    <p className="text-sm text-stone-500 mt-1">{relProject.category}</p>
                                 </Link>
                             ))}
                         </div>
@@ -324,22 +303,33 @@ const ProjectDetail = () => {
                 </div>
             )}
 
+            {/* Footer */}
+            <footer className="px-6 lg:px-16 py-12 border-t border-stone-200">
+                <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p className="text-stone-400 text-sm">© {new Date().getFullYear()} Fadli Ardiansyah Harahap</p>
+                    <Link 
+                        to="/"
+                        className="text-stone-500 hover:text-stone-900 text-sm transition-colors"
+                    >
+                        Back to Home
+                    </Link>
+                </div>
+            </footer>
+
             {/* Image Lightbox Modal */}
             {isLightboxOpen && selectedImage && (
                 <div 
-                    className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 backdrop-blur-md animate-fade-in"
+                    className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 backdrop-blur-md"
                     onClick={closeLightbox}
                 >
-                    {/* Close Button */}
                     <button
                         onClick={closeLightbox}
-                        className="fixed top-8 right-8 z-[10000] w-12 h-12 rounded-full bg-slate-900/80 border border-slate-700 flex items-center justify-center hover:bg-neon hover:border-neon hover:text-slate-950 transition-all duration-300 group"
+                        className="fixed top-6 right-6 z-[10000] w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors text-white"
                         aria-label="Close lightbox"
                     >
                         <X className="w-6 h-6" />
                     </button>
 
-                    {/* Image Container */}
                     <div 
                         className="relative max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center p-8"
                         onClick={(e) => e.stopPropagation()}
@@ -347,15 +337,12 @@ const ProjectDetail = () => {
                         <img
                             src={selectedImage}
                             alt="Full size preview"
-                            className="max-w-full max-h-full object-contain rounded-2xl shadow-2xl"
+                            className="max-w-full max-h-full object-contain rounded-lg"
                         />
                     </div>
 
-                    {/* Instructions */}
-                    <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 text-slate-400 text-sm font-mono">
-                        <span className="bg-slate-900/50 backdrop-blur-sm px-4 py-2 rounded-full border border-slate-800">
-                            Klik tombol X untuk menutup
-                        </span>
+                    <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 text-white/60 text-sm">
+                        Click anywhere to close
                     </div>
                 </div>
             )}

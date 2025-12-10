@@ -9,11 +9,9 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Projects from './components/Projects';
-import Skills from './components/Skills';
 import Experience from './components/Experience';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import InteractiveBackground from './components/InteractiveBackground';
 import ProjectDetail from './components/ProjectDetail';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -41,27 +39,23 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="bg-slate-950 min-h-screen text-white selection:bg-neon selection:text-slate-950 font-sans relative">
-        <InteractiveBackground />
-        <div className="relative z-10">
-          <Routes>
-            <Route path="/" element={
-              <>
-                <Navbar />
-                <main>
-                  <Hero />
-                  <About />
-                  <Projects />
-                  <Skills />
-                  <Experience />
-                  <Contact />
-                </main>
-                <Footer />
-              </>
-            } />
-            <Route path="/project/:id" element={<ProjectDetail />} />
-          </Routes>
-        </div>
+      <div className="bg-[#faf8f5] min-h-screen text-stone-900 selection:bg-stone-900 selection:text-white font-sans relative">
+        <Routes>
+          <Route path="/" element={
+            <>
+              <Navbar />
+              <main>
+                <Hero />
+                <Projects />
+                <About />
+                <Experience />
+                <Contact />
+              </main>
+              <Footer />
+            </>
+          } />
+          <Route path="/project/:id" element={<ProjectDetail />} />
+        </Routes>
       </div>
     </BrowserRouter>
   );

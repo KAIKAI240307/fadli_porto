@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import { Briefcase, Calendar } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -9,103 +8,110 @@ const experiences = [
     role: "ShopKeeper",
     company: "WarungFadli",
     period: "2015 - Present",
-    description: "Mengelola operasional toko meliputi inventaris, transaksi penjualan, pelayanan pelanggan, pencatatan keuangan sederhana, serta kebersihan dan kerapihan toko.."
+    description: "Mengelola operasional toko meliputi inventaris, transaksi penjualan, pelayanan pelanggan, pencatatan keuangan sederhana, serta kebersihan dan kerapihan toko."
   },
   {
     id: 2,
-    role: "QA (Quality Assurance) Engineer",
+    role: "QA Engineer",
     company: "HansKongkow Warmindo",
     period: "Oktober 2024 - Januari 2025",
-    description: "Melaksanakan pengujian menyeluruh untuk sistem e-commerce meliputi fungsionalitas pemesanan, payment gateway, autentikasi pengguna, dan responsivitas UI/UX lintas perangkat. Menerapkan security testing dan performance testing untuk mengidentifikasi kerentanan serta bottleneck sistem. Mengembangkan dokumentasi test case, laporan bug terperinci, dan berkolaborasi dengan tim development untuk resolusi bug dan regression testing."
+    description: "Melaksanakan pengujian menyeluruh untuk sistem e-commerce meliputi fungsionalitas pemesanan, payment gateway, autentikasi pengguna, dan responsivitas UI/UX lintas perangkat."
   },
 ];
-
-const ExperienceItem = ({ exp }) => (
-  <div className="experience-item relative pl-8 md:pl-0 opacity-0">
-    {/* Timeline Line (Mobile) */}
-    <div className="md:hidden absolute left-0 top-0 bottom-0 w-px bg-slate-800">
-      <div className="absolute top-0 left-[-4px] w-2 h-2 rounded-full bg-neon" />
-    </div>
-
-    <div className="md:flex items-center justify-between group">
-      <div className="md:w-5/12 md:text-right md:pr-8">
-        <h3 className="text-xl font-bold text-white group-hover:text-neon transition-colors">{exp.role}</h3>
-        <p className="text-neon font-medium mb-1">{exp.company}</p>
-        <div className="flex items-center md:justify-end gap-2 text-slate-500 text-sm mb-2 md:mb-0">
-          <Calendar size={14} />
-          <span>{exp.period}</span>
-        </div>
-      </div>
-
-      {/* Center Dot (Desktop) */}
-      <div className="hidden md:flex flex-col items-center w-2/12">
-        <div className="w-4 h-4 rounded-full bg-slate-800 border-2 border-slate-600 group-hover:border-neon group-hover:bg-neon transition-all duration-300 z-10" />
-        <div className="h-full w-px bg-slate-800 -mt-2 -mb-4" />
-      </div>
-
-      <div className="md:w-5/12 md:pl-8">
-        <p className="text-slate-400 text-sm leading-relaxed">
-          {exp.description}
-        </p>
-      </div>
-    </div>
-  </div>
-);
 
 const Experience = () => {
   const containerRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(".experience-title", {
-        y: 50,
-        opacity: 0,
-        duration: 1,
+      // Set initial state
+      gsap.set(".exp-title", { y: 60, opacity: 0 });
+      gsap.set(".exp-item", { y: 40, opacity: 0 });
+
+      // Animate title
+      gsap.to(".exp-title", {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power2.out",
         scrollTrigger: {
-          trigger: containerRef.current,
+          trigger: ".experience-section",
           start: "top 80%",
           toggleActions: "play reverse play reverse",
         }
       });
 
-      const items = gsap.utils.toArray(".experience-item");
-      items.forEach((item, i) => {
-        gsap.to(item, {
-          opacity: 1,
-          x: 0,
-          duration: 0.8,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: item,
-            start: "top 85%",
-            toggleActions: "play reverse play reverse"
-          }
-        });
-        
-        // Initial state set in CSS or via gsap.set
-        gsap.set(item, { x: i % 2 === 0 ? -50 : 50 });
+      // Animate items
+      gsap.to(".exp-item", {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        stagger: 0.15,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".exp-list",
+          start: "top 80%",
+          toggleActions: "play reverse play reverse",
+        }
       });
-      
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section id="experience" ref={containerRef} className="py-20">
-      <div className="max-w-5xl mx-auto px-6">
-        <div className="experience-title text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-            Work <span className="text-neon">Experience</span>
+    <section 
+      id="experience" 
+      ref={containerRef} 
+      className="experience-section relative z-10 bg-[#faf8f5]"
+    >
+      {/* Header */}
+      <div className="py-20 lg:py-28 px-6 lg:px-16">
+        <div className="max-w-5xl mx-auto">
+          <p className="exp-title text-stone-500 text-sm uppercase tracking-widest mb-6">
+            Experience
+          </p>
+          <h2 className="exp-title text-3xl md:text-4xl lg:text-5xl font-display font-medium text-stone-900 leading-relaxed max-w-3xl">
+            My professional journey and the roles that shaped my expertise.
           </h2>
         </div>
+      </div>
 
-        <div className="space-y-12 md:space-y-0 md:gap-y-12 flex flex-col">
-          {experiences.map((exp) => (
-            <ExperienceItem key={exp.id} exp={exp} />
+      {/* Divider */}
+      <div className="w-full h-px bg-stone-300 mx-auto max-w-5xl" />
+
+      {/* Experience List */}
+      <div className="exp-list py-16 lg:py-24 px-6 lg:px-16">
+        <div className="max-w-5xl mx-auto space-y-0">
+          {experiences.map((exp, index) => (
+            <div 
+              key={exp.id}
+              className="exp-item group border-b border-stone-300 py-8"
+            >
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <div className="flex items-start gap-6">
+                  <span className="text-stone-400 text-sm font-mono w-6 pt-1">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <div>
+                    <h3 className="text-xl md:text-2xl font-display font-medium text-stone-900">
+                      {exp.role}
+                    </h3>
+                    <p className="text-stone-600 text-sm mt-1">{exp.company}</p>
+                    <p className="text-stone-400 text-sm mt-1">{exp.period}</p>
+                  </div>
+                </div>
+                <p className="text-stone-500 text-sm leading-relaxed md:max-w-md md:text-right">
+                  {exp.description}
+                </p>
+              </div>
+            </div>
           ))}
         </div>
       </div>
+
+      {/* Bottom spacing */}
+      <div className="h-16" />
     </section>
   );
 };

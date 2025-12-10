@@ -1,30 +1,66 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ExternalLink, ArrowUpRight } from 'lucide-react';
-import Tilt from 'react-parallax-tilt';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { projectsData } from '../data/projectsData';
 
 const Projects = () => {
-  const [filter, setFilter] = useState("All");
-  const categories = ["All", "Web App", "AI / ML", "Mobile App"];
   const containerRef = useRef(null);
-  const titleRef = useRef(null);
+  const cursorRef = useRef(null);
+  const [hoveredProject, setHoveredProject] = useState(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  const filteredProjects = filter === "All" 
-    ? projectsData 
-    : projectsData.filter(p => p.category === filter);
+  // Handle mouse move for cursor-following title
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
 
-  // Animation untuk header - hanya run sekali saat component mount
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  // Animate cursor label
+  useEffect(() => {
+    if (cursorRef.current) {
+      gsap.to(cursorRef.current, {
+        x: mousePos.x + 20,
+        y: mousePos.y + 20,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    }
+  }, [mousePos]);
+
+  // Scroll animations
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(titleRef.current, {
-        y: 50,
-        opacity: 0,
+      // Set initial state
+      gsap.set(".works-title", { y: 60, opacity: 0 });
+      gsap.set(".project-card-new", { y: 80, opacity: 0 });
+
+      // Animate title
+      gsap.to(".works-title", {
+        y: 0,
+        opacity: 1,
         duration: 1,
+        ease: "power2.out",
         scrollTrigger: {
-          trigger: titleRef.current,
+          trigger: ".works-section",
+          start: "top 80%",
+          toggleActions: "play reverse play reverse",
+        }
+      });
+
+      // Animate project cards
+      gsap.to(".project-card-new", {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".projects-grid",
           start: "top 80%",
           toggleActions: "play reverse play reverse",
         }
@@ -32,138 +68,98 @@ const Projects = () => {
     }, containerRef);
 
     return () => ctx.revert();
-  }, []); // Empty dependency - run sekali saja
-
-  // Animation untuk project cards - run saat filter berubah
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(".project-card", {
-        y: 100,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 70%",
-          toggleActions: "play reverse play reverse",
-        }
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, [filter]); // Run saat filter berubah
+  }, []);
 
   return (
-    <section id="works" ref={containerRef} className="py-20 relative z-10">
-      <div className="max-w-7xl mx-auto px-6">
-        <div ref={titleRef} className="flex flex-col md:flex-row justify-between items-end mb-16">
-          <div>
-            <h2 className="text-4xl md:text-6xl font-display font-bold mb-4">
-              Selected <span className="text-neon">Works</span>
-            </h2>
-            <p className="text-slate-400 max-w-xl">
-              A collection of digital experiences, blending code and creativity.
+    <>
+      <section 
+        id="works" 
+        ref={containerRef} 
+        className="works-section relative z-10 bg-[#faf8f5]"
+      >
+        {/* Header */}
+        <div className="py-20 lg:py-28 px-6 lg:px-16">
+          <div className="max-w-6xl mx-auto">
+            <p className="works-title text-stone-500 text-sm uppercase tracking-widest mb-6">
+              Selected Works
             </p>
-          </div>
-          
-          {/* Filter Buttons */}
-          <div className="flex flex-wrap gap-2 mt-6 md:mt-0">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setFilter(cat)}
-                className={`px-4 py-2 rounded-full text-xs font-medium uppercase tracking-wider transition-all duration-300 border ${
-                  filter === cat 
-                    ? 'bg-neon text-slate-950 border-neon' 
-                    : 'bg-transparent text-slate-400 border-slate-800 hover:border-neon hover:text-white'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+            <h2 className="works-title text-4xl md:text-5xl lg:text-6xl font-display font-medium text-stone-900 leading-tight max-w-4xl">
+              A collection of digital experiences, blending code and creativity.
+            </h2>
           </div>
         </div>
 
         {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 gap-12">
-          {filteredProjects.map((project) => (
-            <Tilt
-              key={project.id}
-              tiltMaxAngleX={3}
-              tiltMaxAngleY={3}
-              scale={1.01}
-              transitionSpeed={1000}
-              className="project-card"
-            >
-              <div className="group relative bg-slate-900/50 backdrop-blur-md rounded-3xl overflow-hidden border border-slate-800 hover:border-neon/50 transition-all duration-500">
-                <div className="grid md:grid-cols-2 gap-0">
-                    {/* Image Section */}
-                    <div className="h-64 md:h-auto relative overflow-hidden group-hover:scale-105 transition-transform duration-700">
-                        <img 
-                            src={project.image} 
-                            alt={project.title}
-                            className="w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-60" />
-                        
-                        {/* Decorative Elements */}
-                        <div className="absolute top-4 left-4 w-8 h-8 border-t border-l border-neon/50 rounded-tl-lg" />
-                        <div className="absolute bottom-4 right-4 w-8 h-8 border-b border-r border-neon/50 rounded-br-lg" />
-                    </div>
+        <div className="projects-grid pb-20 lg:pb-32 px-6 lg:px-16">
+          <div className="max-w-6xl mx-auto space-y-8">
+            {projectsData.map((project, index) => (
+              <Link 
+                key={project.id}
+                to={`/project/${project.id}`}
+                className="project-card-new block group"
+                onMouseEnter={() => setHoveredProject(project)}
+                onMouseLeave={() => setHoveredProject(null)}
+              >
+                <div className="relative overflow-hidden rounded-2xl bg-stone-200">
+                  {/* Project Image */}
+                  <div className="aspect-[16/9] md:aspect-[21/9] overflow-hidden">
+                    <img 
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
 
-                    {/* Content Section */}
-                    <div className="p-8 flex flex-col justify-between bg-slate-950/50">
-                        <div>
-                            <div className="flex justify-between items-start mb-6">
-                                <div>
-                                    <h3 className="text-2xl font-bold text-white font-display uppercase leading-none">
-                                        {project.title}
-                                    </h3>
-                                    <span className="text-neon font-script text-lg">{project.subtitle}</span>
-                                </div>
-                                <div className="text-xs font-mono text-slate-500 rotate-90 origin-top-right translate-x-2">
-                                    {project.category}
-                                </div>
-                            </div>
+                  {/* Overlay on hover */}
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-500" />
 
-                            <div className="space-y-6">
-                                <div>
-                                    <h4 className="text-xs text-slate-500 uppercase tracking-wider mb-2">Project Info</h4>
-                                    <p className="text-slate-400 text-sm leading-relaxed">
-                                        {project.description}
-                                    </p>
-                                </div>
+                  {/* Project number */}
+                  <div className="absolute top-6 left-6 text-stone-500 text-sm font-mono opacity-60">
+                    {String(index + 1).padStart(2, '0')}
+                  </div>
 
-                                <div className="border-t border-slate-800 pt-4">
-                                    <div className="flex justify-between items-center mb-2">
-                                        <span className="text-xs text-slate-500 uppercase">Year</span>
-                                        <span className="text-sm text-white font-mono">{project.year}</span>
-                                    </div>
-                                    <div className="flex justify-between items-center">
-                                        <span className="text-xs text-slate-500 uppercase">Awards</span>
-                                        <span className="text-sm text-white font-bold">{project.awards}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="mt-8 flex items-center justify-between">
-                            <Link 
-                                to={`/project/${project.id}`}
-                                className="px-6 py-3 rounded-full border border-slate-700 text-xs font-bold uppercase tracking-wider hover:bg-white hover:text-black transition-colors duration-300 inline-block text-center"
-                            >
-                                View Details
-                            </Link>
-                        </div>
-                    </div>
+                  {/* Arrow indicator */}
+                  <div className="absolute bottom-6 right-6 w-12 h-12 rounded-full bg-white/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
+                    <svg className="w-5 h-5 text-stone-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </div>
                 </div>
-              </div>
-            </Tilt>
-          ))}
+
+                {/* Project Info - Below Image */}
+                <div className="mt-6 flex items-start justify-between">
+                  <div>
+                    <h3 className="text-xl md:text-2xl font-display font-medium text-stone-900 group-hover:text-stone-600 transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="text-stone-500 text-sm mt-1">{project.subtitle}</p>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-stone-400 text-sm">{project.year}</span>
+                    <p className="text-stone-500 text-xs mt-1">{project.category}</p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Cursor-following label */}
+      {hoveredProject && (
+        <div 
+          ref={cursorRef}
+          className="fixed pointer-events-none z-50 px-4 py-2 bg-stone-900 text-white rounded-full text-sm font-medium shadow-lg"
+          style={{
+            left: 0,
+            top: 0,
+            transform: `translate(${mousePos.x + 20}px, ${mousePos.y + 20}px)`
+          }}
+        >
+          View Project
+        </div>
+      )}
+    </>
   );
 };
 

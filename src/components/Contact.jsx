@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Mail, MapPin, Github, Linkedin, Twitter, Dribbble } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -8,27 +8,33 @@ const Contact = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(".contact-info", {
-        x: -50,
-        opacity: 0,
-        duration: 1,
+      // Set initial state
+      gsap.set(".contact-title", { y: 60, opacity: 0 });
+      gsap.set(".contact-links", { y: 30, opacity: 0 });
+
+      // Animate
+      gsap.to(".contact-title", {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.2,
         ease: "power2.out",
         scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 70%",
-          toggleActions: "play reverse play reverse",
+          trigger: ".contact-section",
+          start: "top 80%",
+          toggleActions: "play none play none",
         }
       });
 
-      gsap.from(".contact-form", {
-        x: 50,
-        opacity: 0,
-        duration: 1,
+      gsap.to(".contact-links", {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
         ease: "power2.out",
         scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 70%",
-          toggleActions: "play reverse play reverse",
+          trigger: ".contact-section",
+          start: "top 80%",
+          toggleActions: "play none play none",
         }
       });
     }, containerRef);
@@ -37,44 +43,40 @@ const Contact = () => {
   }, []);
 
   return (
-    <section id="contact" ref={containerRef} className="py-20 relative">
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-800 to-transparent" />
-      
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Contact Info - Center Aligned */}
-        <div className="contact-info max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
-            Let's <span className="text-neon">Connect</span>
-          </h2>
-          <p className="text-slate-400 text-lg mb-8 leading-relaxed">
-            I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
+    <section 
+      id="contact" 
+      ref={containerRef} 
+      className="contact-section relative z-10 bg-[#faf8f5]"
+    >
+      <div className="py-24 lg:py-32 px-6 lg:px-16">
+        <div className="max-w-5xl mx-auto text-center">
+          {/* Title */}
+          <p className="contact-title text-stone-500 text-sm uppercase tracking-widest mb-6">
+            Contact
           </p>
+          <h2 className="contact-title text-3xl md:text-4xl lg:text-5xl font-display font-medium text-stone-900 leading-relaxed mb-12">
+            Have a project in mind?<br />Let's work together.
+          </h2>
 
-          <div className="flex justify-center mb-10">
-            <div className="flex items-center gap-4 text-slate-300">
-              <div className="p-3 bg-slate-900 rounded-full text-neon">
-                <MapPin size={20} />
-              </div>
-              <span>Jakarta, Indonesia</span>
-            </div>
-          </div>
-
-          <div className="flex justify-center gap-4">
+          {/* Social Links */}
+          <div className="contact-links flex justify-center gap-6">
             <a
               href="https://github.com/KAIKAI240307"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 bg-slate-900 rounded-full text-slate-400 hover:bg-neon hover:text-slate-950 transition-all duration-300 hover:-translate-y-1"
+              className="flex items-center gap-2 text-stone-500 hover:text-stone-900 transition-colors"
             >
               <Github size={20} />
+              <span className="text-sm">GitHub</span>
             </a>
             <a
               href="https://www.linkedin.com/in/fadli-ardiansyah-harahap-9629a322b/"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 bg-slate-900 rounded-full text-slate-400 hover:bg-neon hover:text-slate-950 transition-all duration-300 hover:-translate-y-1"
+              className="flex items-center gap-2 text-stone-500 hover:text-stone-900 transition-colors"
             >
               <Linkedin size={20} />
+              <span className="text-sm">LinkedIn</span>
             </a>
           </div>
         </div>

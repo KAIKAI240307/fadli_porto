@@ -1,5 +1,4 @@
 import React from 'react';
-import { ArrowUp } from 'lucide-react';
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -7,20 +6,39 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-slate-950 py-8 border-t border-slate-900">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p className="text-slate-500 text-sm">
-          © {new Date().getFullYear()} Akai. All rights reserved.
-        </p>
-        
-        <div className="flex items-center gap-6">
-          <button
-            onClick={scrollToTop}
-            className="p-2 bg-slate-900 rounded-full text-slate-400 hover:text-neon hover:bg-slate-800 transition-colors"
-            aria-label="Back to top"
-          >
-            <ArrowUp size={20} />
-          </button>
+    <footer className="bg-[#faf8f5] py-12 border-t border-stone-200">
+      <div className="max-w-5xl mx-auto px-6 lg:px-16">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+          {/* Copyright */}
+          <p className="text-stone-400 text-sm">
+            © {new Date().getFullYear()} Fadli Ardiansyah Harahap
+          </p>
+          
+          {/* Links */}
+          <div className="flex items-center gap-8">
+            <a 
+              href="https://github.com/KAIKAI240307"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-stone-400 hover:text-stone-900 text-sm transition-colors"
+            >
+              GitHub
+            </a>
+            <a 
+              href="https://www.linkedin.com/in/fadli-ardiansyah-harahap-9629a322b/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-stone-400 hover:text-stone-900 text-sm transition-colors"
+            >
+              LinkedIn
+            </a>
+            <button
+              onClick={scrollToTop}
+              className="text-stone-400 hover:text-stone-900 text-sm transition-colors"
+            >
+              Back to top ↑
+            </button>
+          </div>
         </div>
       </div>
     </footer>
