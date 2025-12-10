@@ -50,8 +50,8 @@ const About = () => {
   // Hard Skills
   const hardSkills = [
     "JavaScript", "Python", "SQL", "Data Analysis", 
-    "Machine Learning", "TensorFlow", "PowerBI", "Tableau",
-    "React", "Node.js", "MongoDB", "PostgreSQL"
+    "Machine Learning","Data Science", "TensorFlow", "PowerBI", "Tableau",
+    "React", "PostgreSQL"
   ];
 
   // Soft Skills
