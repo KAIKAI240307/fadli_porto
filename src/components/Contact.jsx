@@ -70,7 +70,7 @@ const Contact = () => {
               <span className="text-sm">GitHub</span>
             </a>
             <a
-              href="https://www.linkedin.com/in/fadli-ardiansyah-harahap-9629a322b/"
+              href="www.linkedin.com/in/fadli-ardiansyah-harahap"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-stone-500 hover:text-stone-900 transition-colors"
