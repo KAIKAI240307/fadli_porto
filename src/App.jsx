@@ -14,6 +14,8 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ProjectDetail from './components/ProjectDetail';
 
+import ProjectDocumentation from './components/ProjectDocumentation';
+
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
@@ -55,6 +57,7 @@ function App() {
             </>
           } />
           <Route path="/project/:id" element={<ProjectDetail />} />
+          <Route path="/project/:id/docs" element={<ProjectDocumentation />} />
         </Routes>
       </div>
     </BrowserRouter>

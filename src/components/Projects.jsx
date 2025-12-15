@@ -129,9 +129,16 @@ const Projects = () => {
                 {/* Project Info - Below Image */}
                 <div className="mt-6 flex items-start justify-between">
                   <div>
-                    <h3 className="text-xl md:text-2xl font-display font-medium text-stone-900 group-hover:text-stone-600 transition-colors">
-                      {project.title}
-                    </h3>
+                    <div className="flex items-center gap-3">
+                      <h3 className="text-xl md:text-2xl font-display font-medium text-stone-900 group-hover:text-stone-600 transition-colors">
+                        {project.title}
+                      </h3>
+                      {project.status === 'ongoing' && (
+                        <span className="px-2 py-1 bg-amber-100 text-amber-700 text-xs font-medium rounded-full">
+                          Ongoing {project.progress}%
+                        </span>
+                      )}
+                    </div>
                     <p className="text-stone-500 text-sm mt-1">{project.subtitle}</p>
                   </div>
                   <div className="text-right">

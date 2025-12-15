@@ -95,7 +95,7 @@ const ProjectDetail = () => {
             <nav className="fixed top-0 left-0 right-0 z-50 bg-[#faf8f5]/90 backdrop-blur-md py-4">
                 <div className="max-w-6xl mx-auto px-6 lg:px-16 flex justify-between items-center">
                     <button
-                        onClick={() => navigate(-1)}
+                        onClick={() => navigate("/#works")}
                         className="flex items-center gap-2 text-stone-600 hover:text-stone-900 transition-colors group"
                     >
                         <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
@@ -110,11 +110,19 @@ const ProjectDetail = () => {
             {/* Hero Section */}
             <div ref={headerRef} className="pt-32 pb-16 px-6 lg:px-16">
                 <div className="max-w-5xl mx-auto">
-                    {/* Category & Year */}
+                    {/* Category & Year & Status */}
                     <div className="detail-animate flex items-center gap-4 mb-8">
                         <span className="text-stone-400 text-sm">{project.category}</span>
                         <span className="text-stone-300">•</span>
                         <span className="text-stone-400 text-sm">{project.year}</span>
+                        {project.status === 'ongoing' && (
+                            <>
+                                <span className="text-stone-300">•</span>
+                                <span className="px-3 py-1 bg-amber-100 text-amber-700 text-xs font-medium rounded-full">
+                                    In Progress ({project.progress}%)
+                                </span>
+                            </>
+                        )}
                     </div>
 
                     {/* Title */}
@@ -128,6 +136,17 @@ const ProjectDetail = () => {
 
                     {/* CTA Buttons */}
                     <div className="detail-animate flex flex-wrap gap-4">
+                        {project.hasDocumentation && (
+                            <Link
+                                to={`/project/${id}/docs`}
+                                className="flex items-center gap-2 px-6 py-3 bg-stone-900 text-white rounded-full text-sm hover:bg-stone-700 transition-colors"
+                            >
+                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                                View Documentation
+                            </Link>
+                        )}
                         {project.github && (
                             <a
                                 href={project.github}

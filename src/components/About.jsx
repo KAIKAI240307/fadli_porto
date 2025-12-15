@@ -152,7 +152,7 @@ const About = () => {
               <div className="about-intro">
                 <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-stone-200">
                   <img 
-                    src="/images/projects/profile.jpg" 
+                    src="/images/projects/fadli.png" 
                     alt="Fadli Ardiansyah Harahap"
                     className="w-full h-full object-cover"
                   />

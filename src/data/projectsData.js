@@ -98,6 +98,140 @@ export const projectsData = [
         ],
         link: "#",
     },
+    {
+        id: 4,
+        title: "Analisis Data Retail Online (UK)",
+        subtitle: "Data Analyst Project",
+        category: "Data Analysis",
+        description: "Analisis komprehensif data retail online UK menggunakan Python, termasuk RFM Analysis, Customer Segmentation, dan Business Metrics dengan visualisasi di Power BI & Tableau.",
+        detailedDescription: "Project data analyst yang menganalisis dataset retail online dari UK. Mencakup data cleaning, exploratory analysis, RFM segmentation, business metrics (AOV, CLV, Retention Rate), K-Means clustering, dan market basket analysis. Output berupa 5 dashboard di Power BI dan Tableau.",
+        year: "2025",
+        awards: "",
+        status: "ongoing",
+        progress: 25,
+        image: "/images/projects/E-commerce_analytic.png",
+        images: [
+            "/images/projects/E-commerce_analytic.png"
+        ],
+        technologies: ["Python", "Pandas", "NumPy", "Scikit-learn", "Power BI", "Tableau", "SQL"],
+        features: [
+            "Data Cleaning & Preprocessing",
+            "RFM Analysis & Customer Segmentation",
+            "Business Metrics (AOV, CLV, Retention Rate, Churn Rate)",
+            "K-Means Clustering",
+            "Market Basket Analysis",
+            "5 Interactive Dashboards"
+        ],
+        challenges: [],
+        results: [],
+        phases: [
+            { 
+                id: 1, 
+                name: "Setup & Import", 
+                status: "completed", 
+                description: "Setup environment & import libraries",
+                details: "Menyiapkan environment Python dengan Jupyter Notebook, menginstall dan mengimport library yang diperlukan seperti Pandas, NumPy, Matplotlib, Seaborn, dan Scikit-learn.",
+                documents: [
+                    { type: "pdf", url: "/docs/phase1.pdf", title: "Setup Environment & Import Libraries" }
+                ]
+            },
+            { 
+                id: 2, 
+                name: "Data Loading", 
+                status: "completed", 
+                description: "Load data & eksplorasi awal",
+                details: "Memuat dataset retail online UK, melakukan eksplorasi awal untuk memahami struktur data, tipe data, dan statistik deskriptif dasar.",
+                documents: [
+                    { type: "pdf", url: "/docs/phase2.pdf", title: "Data Loading & Eksplorasi Awal" }
+                ]
+            },
+            { 
+                id: 3, 
+                name: "Data Cleaning", 
+                status: "completed", 
+                description: "Cleaning, handle missing values, remove duplicates & outliers",
+                details: "Membersihkan data dengan menangani missing values menggunakan mean/median/modus, menghapus duplikat, mengidentifikasi dan menangani outliers, serta menyesuaikan tipe data.",
+                documents: [
+                    { type: "pdf", url: "/docs/phase3.pdf", title: "Data Cleaning" }
+                ]
+            },
+            { 
+                id: 4, 
+                name: "Exploratory Analysis", 
+                status: "in-progress", 
+                description: "Analisis deskriptif & performa penjualan",
+                details: "Melakukan analisis deskriptif mendalam dan menganalisis performa penjualan per kategori produk.",
+                documents: []
+            },
+            { 
+                id: 5, 
+                name: "Business Analysis", 
+                status: "pending", 
+                description: "Segmentasi pelanggan, analisis geografis, time series",
+                details: "Analisis segmentasi pelanggan, analisis geografis penjualan, dan analisis time series untuk pola musiman.",
+                documents: []
+            },
+            { 
+                id: 6, 
+                name: "RFM Analysis", 
+                status: "pending", 
+                description: "Recency, Frequency, Monetary segmentation",
+                details: "Perhitungan skor RFM dan segmentasi pelanggan berdasarkan perilaku pembelian.",
+                documents: []
+            },
+            { 
+                id: 7, 
+                name: "Business Metrics", 
+                status: "pending", 
+                description: "AOV, CLV, Retention Rate, Churn Rate",
+                details: "Menghitung metrik bisnis penting: Average Order Value, Customer Lifetime Value, Retention Rate dengan cohort analysis, dan Churn Rate.",
+                documents: []
+            },
+            { 
+                id: 8, 
+                name: "Data Modeling", 
+                status: "pending", 
+                description: "K-Means clustering, market basket analysis",
+                details: "Implementasi K-Means clustering untuk segmentasi dan market basket analysis untuk product affinity.",
+                documents: []
+            },
+            { 
+                id: 9, 
+                name: "Power BI Dashboard", 
+                status: "pending", 
+                description: "5 interactive dashboards",
+                details: "Membuat 5 dashboard interaktif di Power BI dengan DAX measures dan calculated fields.",
+                documents: []
+            },
+            { 
+                id: 10, 
+                name: "Tableau Dashboard", 
+                status: "pending", 
+                description: "5 interactive dashboards",
+                details: "Membuat 5 dashboard interaktif di Tableau dengan calculated fields dan parameters.",
+                documents: []
+            },
+            { 
+                id: 11, 
+                name: "Star Schema Export", 
+                status: "pending", 
+                description: "Export data dalam format star schema",
+                details: "Mengexport data dalam format star schema untuk optimasi query di BI tools.",
+                documents: []
+            },
+            { 
+                id: 12, 
+                name: "Documentation", 
+                status: "pending", 
+                description: "Final documentation & insights",
+                details: "Dokumentasi lengkap project termasuk metodologi, findings, dan actionable insights.",
+                documents: []
+            }
+        ],
+        link: "#",
+        github: "",
+        hasDocumentation: true
+    },
     
 ];
 
