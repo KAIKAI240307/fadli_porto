@@ -19,7 +19,7 @@ const About = () => {
       id: 2,
       title: "Oracle for Beginner",
       issuer: "Oracle Database",
-      image: "/images/certifications/oracle-beginner.png"
+      image: "/images/certifications/oracle-beginer.png"
     },
     {
       id: 3,
@@ -49,8 +49,8 @@ const About = () => {
 
   // Hard Skills
   const hardSkills = [
-    "JavaScript", "Python", "SQL", "Data Analysis", 
-    "Machine Learning","Data Science", "TensorFlow", "PowerBI", "Tableau",
+    "JavaScript", "Python", "SQL", "Data Analysis",
+    "Machine Learning", "Data Science", "TensorFlow", "PowerBI", "Tableau",
     "React", "PostgreSQL"
   ];
 
@@ -139,9 +139,9 @@ const About = () => {
 
   return (
     <>
-      <section 
-        id="about" 
-        ref={containerRef} 
+      <section
+        id="about"
+        ref={containerRef}
         className="relative z-10 bg-[#faf8f5]"
       >
         {/* Intro Section with Profile Photo */}
@@ -151,8 +151,8 @@ const About = () => {
               {/* Profile Photo */}
               <div className="about-intro">
                 <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-stone-200">
-                  <img 
-                    src="/images/projects/fadli.png" 
+                  <img
+                    src="/images/projects/fadli.png"
                     alt="Fadli Ardiansyah Harahap"
                     className="w-full h-full object-cover"
                   />
@@ -168,11 +168,11 @@ const About = () => {
                   In the game since 2021, constantly evolving. I've worked with data, algorithms, and everything in between.
                 </h2>
                 <p className="about-intro text-lg text-stone-600 leading-relaxed">
-                  I am a passionate Data Analyst and Machine Learning Engineer with a knack for turning complex data into actionable insights. 
+                  I am a passionate Data Analyst and Machine Learning Engineer with a knack for turning complex data into actionable insights.
                   My approach combines technical expertise with creative problem-solving to build scalable, efficient, and user-centric solutions.
                 </p>
                 <p className="about-intro text-stone-500 leading-relaxed">
-                  Every project starts from the same place: <span className="italic">understanding the data</span>. 
+                  Every project starts from the same place: <span className="italic">understanding the data</span>.
                   That's where the magic begins.
                 </p>
               </div>
@@ -191,7 +191,7 @@ const About = () => {
             </p>
             <div className="space-y-0">
               {certifications.map((cert, index) => (
-                <div 
+                <div
                   key={cert.id}
                   className="cert-item group border-b border-stone-300 py-5 cursor-pointer hover:bg-stone-100/50 transition-all duration-300 px-2 -mx-2"
                   onClick={() => setSelectedCert(cert)}
@@ -212,10 +212,10 @@ const About = () => {
                       <span className="text-stone-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity">
                         View Certificate
                       </span>
-                      <svg 
-                        className="w-5 h-5 text-stone-400 group-hover:text-stone-900 group-hover:translate-x-1 transition-all" 
-                        fill="none" 
-                        viewBox="0 0 24 24" 
+                      <svg
+                        className="w-5 h-5 text-stone-400 group-hover:text-stone-900 group-hover:translate-x-1 transition-all"
+                        fill="none"
+                        viewBox="0 0 24 24"
                         stroke="currentColor"
                       >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -239,7 +239,7 @@ const About = () => {
             </p>
             <div className="flex flex-wrap gap-3">
               {hardSkills.map((skill) => (
-                <span 
+                <span
                   key={skill}
                   className="hard-skill-tag px-5 py-2.5 bg-stone-200/60 border border-stone-300 rounded-full text-stone-700 text-sm font-medium hover:bg-stone-900 hover:text-white hover:border-stone-900 transition-all duration-300 cursor-default"
                 >
@@ -261,7 +261,7 @@ const About = () => {
             </p>
             <div className="flex flex-wrap gap-3">
               {softSkills.map((skill) => (
-                <span 
+                <span
                   key={skill}
                   className="soft-skill-tag px-5 py-2.5 bg-amber-100/60 border border-amber-300 rounded-full text-amber-800 text-sm font-medium hover:bg-amber-800 hover:text-white hover:border-amber-800 transition-all duration-300 cursor-default"
                 >
@@ -278,15 +278,15 @@ const About = () => {
 
       {/* Certificate Modal */}
       {selectedCert && (
-        <div 
+        <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4"
           onClick={() => setSelectedCert(null)}
         >
           {/* Backdrop */}
           <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
-          
+
           {/* Modal Content */}
-          <div 
+          <div
             className="relative bg-white rounded-2xl overflow-hidden max-w-4xl w-full max-h-[90vh] shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
@@ -298,7 +298,7 @@ const About = () => {
                 </h3>
                 <p className="text-stone-500 text-sm mt-1">{selectedCert.issuer}</p>
               </div>
-              <button 
+              <button
                 onClick={() => setSelectedCert(null)}
                 className="p-2 hover:bg-stone-100 rounded-full transition-colors"
               >
@@ -307,10 +307,10 @@ const About = () => {
                 </svg>
               </button>
             </div>
-            
+
             {/* Certificate Image */}
             <div className="p-6 bg-stone-50 overflow-auto max-h-[70vh]">
-              <img 
+              <img
                 src={selectedCert.image}
                 alt={selectedCert.title}
                 className="w-full h-auto rounded-lg shadow-lg"
