@@ -25,3 +25,6 @@ dist-ssr
 
 # Antigravity / AI Assistant files
 .gemini/
+.idea/
+*.iws
+*.ipr
