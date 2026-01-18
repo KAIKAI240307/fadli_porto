@@ -204,64 +204,79 @@ const ProjectDetail = () => {
             <div ref={contentRef} className="px-6 lg:px-16 pb-24">
                 <div className="max-w-4xl mx-auto space-y-20">
 
-                    {/* Overview */}
-                    <section className="detail-section">
-                        <p className="text-stone-400 text-sm uppercase tracking-widest mb-4">Overview</p>
-                        <p className="text-lg md:text-xl text-stone-700 leading-relaxed">
-                            {project.detailedDescription}
-                        </p>
-                    </section>
-
-                    {/* Divider */}
-                    <div className="w-full h-px bg-stone-200" />
-
-                    {/* Technologies */}
-                    <section className="detail-section">
-                        <p className="text-stone-400 text-sm uppercase tracking-widest mb-6">Technologies</p>
-                        <div className="flex flex-wrap gap-3">
-                            {project.technologies.map((tech, idx) => (
-                                <span
-                                    key={idx}
-                                    className="px-4 py-2 bg-stone-100 border border-stone-200 rounded-full text-sm text-stone-700"
-                                >
-                                    {tech}
-                                </span>
-                            ))}
-                        </div>
-                    </section>
-
-                    {/* Divider */}
-                    <div className="w-full h-px bg-stone-200" />
-
-                    {/* Features */}
-                    <section className="detail-section">
-                        <p className="text-stone-400 text-sm uppercase tracking-widest mb-6">Key Features</p>
-                        <div className="grid md:grid-cols-2 gap-4">
-                            {project.features.map((feature, idx) => (
-                                <div
-                                    key={idx}
-                                    className="flex items-start gap-3 p-4 bg-stone-50 border border-stone-100 rounded-xl"
-                                >
-                                    <CheckCircle className="w-5 h-5 text-stone-400 mt-0.5 flex-shrink-0" />
-                                    <span className="text-stone-700">{feature}</span>
+                    {/* My Process - Timeline */}
+                    {project.process && project.process.length > 0 && (
+                        <section className="detail-section">
+                            <p className="text-stone-400 text-sm uppercase tracking-widest mb-8">My Process</p>
+                            <div className="relative">
+                                {/* Timeline Line */}
+                                <div className="absolute left-6 top-0 bottom-0 w-px bg-stone-200 hidden md:block" />
+                                
+                                <div className="space-y-6">
+                                    {project.process.map((step, idx) => (
+                                        <div key={idx} className="flex items-start gap-6 group">
+                                            {/* Step Number */}
+                                            <div className="relative z-10 w-12 h-12 rounded-full bg-stone-100 border-2 border-stone-200 flex items-center justify-center flex-shrink-0 group-hover:bg-stone-900 group-hover:border-stone-900 transition-colors duration-300">
+                                                <span className="text-sm font-mono text-stone-600 group-hover:text-white transition-colors duration-300">
+                                                    {String(step.step).padStart(2, '0')}
+                                                </span>
+                                            </div>
+                                            
+                                            {/* Step Content */}
+                                            <div className="flex-1 pb-6">
+                                                <h4 className="text-lg font-display font-medium text-stone-900 mb-1">
+                                                    {step.title}
+                                                </h4>
+                                                <p className="text-stone-500 text-sm">
+                                                    {step.description}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
-                        </div>
-                    </section>
+                            </div>
+                        </section>
+                    )}
 
-                    {/* Challenges */}
-                    {project.challenges && project.challenges.length > 0 && (
+                    {/* Case Study - The Challenge */}
+                    {project.caseStudy && (
                         <>
                             <div className="w-full h-px bg-stone-200" />
                             <section className="detail-section">
-                                <p className="text-stone-400 text-sm uppercase tracking-widest mb-6">Challenges</p>
+                                <div className="flex items-center gap-3 mb-6">
+                                    <div className="w-10 h-10 rounded-lg bg-stone-100 flex items-center justify-center">
+                                        <Target className="w-5 h-5 text-stone-600" />
+                                    </div>
+                                    <p className="text-stone-400 text-sm uppercase tracking-widest">The Challenge</p>
+                                </div>
+                                <p className="text-lg md:text-xl text-stone-700 leading-relaxed">
+                                    {project.caseStudy.challenge}
+                                </p>
+                            </section>
+                        </>
+                    )}
+
+                    {/* Case Study - My Approach */}
+                    {project.caseStudy && project.caseStudy.approach && (
+                        <>
+                            <div className="w-full h-px bg-stone-200" />
+                            <section className="detail-section">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <div className="w-10 h-10 rounded-lg bg-stone-100 flex items-center justify-center">
+                                        <Zap className="w-5 h-5 text-stone-600" />
+                                    </div>
+                                    <p className="text-stone-400 text-sm uppercase tracking-widest">My Approach</p>
+                                </div>
                                 <div className="space-y-4">
-                                    {project.challenges.map((challenge, idx) => (
+                                    {project.caseStudy.approach.map((step, idx) => (
                                         <div
                                             key={idx}
-                                            className="p-6 bg-stone-50 border-l-2 border-stone-300 rounded-r-xl"
+                                            className="flex items-start gap-4 p-5 bg-stone-50 border border-stone-100 rounded-xl"
                                         >
-                                            <p className="text-stone-700">{challenge}</p>
+                                            <span className="w-6 h-6 rounded-full bg-stone-200 flex items-center justify-center text-xs font-medium text-stone-600 flex-shrink-0">
+                                                {idx + 1}
+                                            </span>
+                                            <p className="text-stone-700">{step}</p>
                                         </div>
                                     ))}
                                 </div>
@@ -269,24 +284,148 @@ const ProjectDetail = () => {
                         </>
                     )}
 
-                    {/* Results */}
-                    {project.results && project.results.length > 0 && (
+                    {/* Case Study - The Solution + Technologies */}
+                    {project.caseStudy && (
                         <>
                             <div className="w-full h-px bg-stone-200" />
                             <section className="detail-section">
-                                <p className="text-stone-400 text-sm uppercase tracking-widest mb-6">Results</p>
-                                <div className="grid md:grid-cols-3 gap-4">
-                                    {project.results.map((result, idx) => (
+                                <div className="flex items-center gap-3 mb-6">
+                                    <div className="w-10 h-10 rounded-lg bg-stone-100 flex items-center justify-center">
+                                        <CheckCircle className="w-5 h-5 text-stone-600" />
+                                    </div>
+                                    <p className="text-stone-400 text-sm uppercase tracking-widest">The Solution</p>
+                                </div>
+                                <p className="text-lg md:text-xl text-stone-700 leading-relaxed mb-8">
+                                    {project.caseStudy.solution}
+                                </p>
+                                
+                                {/* Technologies */}
+                                <div className="pt-6 border-t border-stone-100">
+                                    <p className="text-stone-500 text-sm mb-4">Technologies Used</p>
+                                    <div className="flex flex-wrap gap-3">
+                                        {project.technologies.map((tech, idx) => (
+                                            <span
+                                                key={idx}
+                                                className="px-4 py-2 bg-stone-100 border border-stone-200 rounded-full text-sm text-stone-700"
+                                            >
+                                                {tech}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            </section>
+                        </>
+                    )}
+
+                    {/* Case Study - Impact & Results */}
+                    {project.caseStudy && project.caseStudy.impact && (
+                        <>
+                            <div className="w-full h-px bg-stone-200" />
+                            <section className="detail-section">
+                                <p className="text-stone-400 text-sm uppercase tracking-widest mb-8">Impact & Results</p>
+                                <div className="grid md:grid-cols-3 gap-6">
+                                    {project.caseStudy.impact.map((item, idx) => (
                                         <div
                                             key={idx}
-                                            className="p-6 bg-stone-50 border border-stone-100 rounded-xl text-center"
+                                            className="p-6 bg-white border border-stone-200 rounded-2xl text-center hover:border-stone-400 hover:shadow-lg transition-all duration-300"
                                         >
-                                            <div className="text-2xl text-stone-400 mb-3">✓</div>
-                                            <p className="text-stone-700 text-sm">{result}</p>
+                                            <div className="text-4xl md:text-5xl font-display font-medium text-stone-900 mb-2">
+                                                {item.metric}
+                                            </div>
+                                            <p className="text-stone-500 text-sm">{item.label}</p>
                                         </div>
                                     ))}
                                 </div>
                             </section>
+                        </>
+                    )}
+
+                    {/* Fallback: Original format if no caseStudy data */}
+                    {!project.caseStudy && (
+                        <>
+                            {/* Overview */}
+                            <section className="detail-section">
+                                <p className="text-stone-400 text-sm uppercase tracking-widest mb-4">Overview</p>
+                                <p className="text-lg md:text-xl text-stone-700 leading-relaxed">
+                                    {project.detailedDescription}
+                                </p>
+                            </section>
+
+                            <div className="w-full h-px bg-stone-200" />
+
+                            {/* Technologies */}
+                            <section className="detail-section">
+                                <p className="text-stone-400 text-sm uppercase tracking-widest mb-6">Technologies</p>
+                                <div className="flex flex-wrap gap-3">
+                                    {project.technologies.map((tech, idx) => (
+                                        <span
+                                            key={idx}
+                                            className="px-4 py-2 bg-stone-100 border border-stone-200 rounded-full text-sm text-stone-700"
+                                        >
+                                            {tech}
+                                        </span>
+                                    ))}
+                                </div>
+                            </section>
+
+                            <div className="w-full h-px bg-stone-200" />
+
+                            {/* Features */}
+                            <section className="detail-section">
+                                <p className="text-stone-400 text-sm uppercase tracking-widest mb-6">Key Features</p>
+                                <div className="grid md:grid-cols-2 gap-4">
+                                    {project.features.map((feature, idx) => (
+                                        <div
+                                            key={idx}
+                                            className="flex items-start gap-3 p-4 bg-stone-50 border border-stone-100 rounded-xl"
+                                        >
+                                            <CheckCircle className="w-5 h-5 text-stone-400 mt-0.5 flex-shrink-0" />
+                                            <span className="text-stone-700">{feature}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+
+                            {/* Challenges */}
+                            {project.challenges && project.challenges.length > 0 && (
+                                <>
+                                    <div className="w-full h-px bg-stone-200" />
+                                    <section className="detail-section">
+                                        <p className="text-stone-400 text-sm uppercase tracking-widest mb-6">Challenges</p>
+                                        <div className="space-y-4">
+                                            {project.challenges.map((challenge, idx) => (
+                                                <div
+                                                    key={idx}
+                                                    className="p-6 bg-stone-50 border-l-2 border-stone-300 rounded-r-xl"
+                                                >
+                                                    <p className="text-stone-700">{challenge}</p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </section>
+                                </>
+                            )}
+
+                            {/* Results */}
+                            {project.results && project.results.length > 0 && (
+                                <>
+                                    <div className="w-full h-px bg-stone-200" />
+                                    <section className="detail-section">
+                                        <p className="text-stone-400 text-sm uppercase tracking-widest mb-6">Results</p>
+                                        <div className="grid md:grid-cols-3 gap-4">
+                                            {project.results.map((result, idx) => (
+                                                <div
+                                                    key={idx}
+                                                    className="p-6 bg-stone-50 border border-stone-100 rounded-xl text-center"
+                                                >
+                                                    <div className="text-2xl text-stone-400 mb-3">✓</div>
+                                                    <p className="text-stone-700 text-sm">{result}</p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </section>
+                                </>
+                            )}
                         </>
                     )}
                 </div>

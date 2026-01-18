@@ -17,21 +17,35 @@ export const projectsData = [
             "/images/projects/SIBI4.jpg",
             "/images/projects/SIBI5.jpg"
         ],
-        technologies: ["TensorFlow", "Python", "Android", "Kontlin" ],
-        features: [
-            "Optimasi performa untuk perangkat android dengan spesifikasi minimum 2GB RAM dan 4GB ROM",
-            "Tampilan yang sederhana dan user-friendly",
-            "Real-time translation"
+        technologies: ["TensorFlow", "Python", "Android", "Kotlin"],
+        
+        // Case Study
+        caseStudy: {
+            challenge: "Komunitas tunarungu di Indonesia menghadapi kesulitan dalam berkomunikasi dengan masyarakat umum karena minimnya pemahaman tentang bahasa isyarat SIBI. Diperlukan solusi teknologi yang dapat menjembatani komunikasi ini secara real-time dan mudah diakses.",
+            approach: [
+                "Mengumpulkan dan mempersiapkan dataset gambar gestur tangan SIBI untuk 26 huruf alphabet",
+                "Membangun dan melatih model Machine Learning menggunakan TensorFlow untuk pengenalan gestur",
+                "Mengoptimasi model untuk dapat berjalan di perangkat Android dengan resource terbatas",
+                "Mengintegrasikan model ke dalam aplikasi Android yang user-friendly"
+            ],
+            solution: "Dikembangkan aplikasi Android yang menggunakan kamera device untuk menangkap gestur tangan secara real-time dan menerjemahkannya menjadi teks alfabet. Model ML dioptimasi menggunakan TensorFlow Lite untuk performa optimal di mobile device.",
+            impact: [
+                { metric: "95%", label: "Akurasi Deteksi" },
+                { metric: "26", label: "Huruf SIBI" },
+                { metric: "Real-time", label: "Proses Translasi" }
+            ]
+        },
+        
+        // Process per project
+        process: [
+            { step: 1, title: "Research", description: "Mempelajari gestur SIBI dan kebutuhan komunitas tunarungu" },
+            { step: 2, title: "Data Collection", description: "Mengumpulkan dataset gambar gestur tangan" },
+            { step: 3, title: "Model Training", description: "Melatih model TensorFlow untuk pengenalan gestur" },
+            { step: 4, title: "Optimization", description: "Mengoptimasi model untuk perangkat mobile" },
+            { step: 5, title: "Development", description: "Membangun aplikasi Android dengan Kotlin" },
+            { step: 6, title: "Testing", description: "Pengujian akurasi dan performa aplikasi" }
         ],
-        challenges: [
-            "Sistem terbatas pada pengenalan gestur alphabet (fingerspelling) SIBI, belum mendukung gestur leksikal yang merepresentasikan kata atau frasa lengkap.",
-            "Sistem belum mampu mendeteksi gestur dari tangan dengan kondisi anatomis yang tidak lengkap, seperti ketiadaan jari tertentu atau jari yang tidak sempurna."
-        ],
-        results: [
-            "Mencapai akurasi hingga 95% dalam mendeteksi gestur tangan",
-            "Jarak optimal penggunaan antara 15-30 cm dari kamera dengan kondisi pencahayaan yang memadai",
-            "Mendukung 26 karakter alphabet SIBI untuk komunikasi dasar"
-        ],
+        
         link: "#",
         github: "https://github.com/KAIKAI240307/SIBI-aplikasi-pengenalan-bahasa-isyarat-.git",
     },
@@ -51,18 +65,34 @@ export const projectsData = [
             "/images/projects/handkonkow (3).png"
         ],
         technologies: ["React", "Node.js", "Prisma", "PostMan"],
-        features: [
-            "Payment gateway integration",
-            "Order management system"
+        
+        // Case Study
+        caseStudy: {
+            challenge: "HansKongkow Warmindo membutuhkan platform digital untuk meningkatkan presence online dan memudahkan pelanggan dalam melihat menu serta melakukan pemesanan. Sistem manual sebelumnya menyebabkan ketidakefisienan dalam proses order dan pembayaran.",
+            approach: [
+                "Analisis kebutuhan bisnis dan user flow untuk pemesanan makanan",
+                "Desain UI/UX yang modern dan mudah digunakan",
+                "Implementasi sistem pemesanan dan payment gateway",
+                "Pengembangan backend dengan Node.js dan Prisma ORM"
+            ],
+            solution: "Platform web yang terintegrasi dengan sistem pemesanan online dan multiple payment gateway (transfer bank dan QRIS). Dilengkapi dengan dashboard admin untuk manajemen order dan menu.",
+            impact: [
+                { metric: "2x", label: "Peningkatan Order" },
+                { metric: "QRIS", label: "Payment Integration" },
+                { metric: "100%", label: "Digital Menu" }
+            ]
+        },
+        
+        // Process per project
+        process: [
+            { step: 1, title: "Discovery", description: "Memahami kebutuhan bisnis warmindo" },
+            { step: 2, title: "Design", description: "Merancang UI/UX yang user-friendly" },
+            { step: 3, title: "Development", description: "Membangun frontend dan backend" },
+            { step: 4, title: "Integration", description: "Integrasi payment gateway" },
+            { step: 5, title: "QA Testing", description: "Pengujian fungsionalitas sistem" },
+            { step: 6, title: "Deployment", description: "Peluncuran dan maintenance" }
         ],
-        challenges: [
-            
-        ],
-        results: [
-            "Meningkatkan pengalaman pelanggan dengan fitur-fitur yang lengkap",
-            "Meningkatkan efisiensi operasional dengan sistem pemesanan dan pembayaran yang otomatis",
-            "Meningkatkan daya taring pelanggan"
-        ],
+        
         link: "#",
         github: "https://github.com/Huzaisa/Hans.git",
     },
@@ -71,7 +101,7 @@ export const projectsData = [
         title: "Sistem Pengenalan Bahasa Isyarat Indonesia",
         subtitle: "Machine Learning",
         category: "AI / ML",
-        description: "Machine Learning model yang didesain untuk mengenali bahasa isyarat Indonesia (SIBI) .",
+        description: "Machine Learning model yang didesain untuk mengenali bahasa isyarat Indonesia (SIBI).",
         detailedDescription: "Sistem machine learning yang dapat mengenali bahasa isyarat Indonesia (SIBI) menggunakan data gambar tangan yang diambil melalui kamera. Sistem ini menganalisis pola dari gambar tangan dan memberikan prediksi huruf yang sesuai dengan gestur tangan yang diambil oleh kamera.",
         year: "2024",
         awards: "Best Tech",
@@ -82,20 +112,34 @@ export const projectsData = [
             "/images/projects/sibibefore (2).png"
         ],
         technologies: ["Python", "TensorFlow", "Computer Vision", "Machine Learning"],
-        features: [
-            "Real-time image detection, gesture recognition, and translation",
-            "Alphabet SIBI",
-            "Custom ML model training"
+        
+        // Case Study
+        caseStudy: {
+            challenge: "Diperlukan sistem yang dapat mengenali gestur bahasa isyarat Indonesia (SIBI) secara akurat menggunakan computer vision. Tantangannya adalah membuat model yang cukup akurat namun tetap ringan untuk digunakan dalam aplikasi real-time.",
+            approach: [
+                "Pengumpulan dataset gestur tangan untuk setiap huruf alphabet SIBI",
+                "Preprocessing dan augmentasi data untuk meningkatkan variasi training data",
+                "Eksperimen dengan berbagai arsitektur CNN untuk menemukan model optimal",
+                "Fine-tuning hyperparameter untuk mencapai akurasi maksimal"
+            ],
+            solution: "Model CNN yang dilatih menggunakan TensorFlow dengan arsitektur yang dioptimasi untuk pengenalan gestur tangan. Model mampu melakukan prediksi real-time dengan akurasi tinggi pada kondisi pencahayaan yang memadai.",
+            impact: [
+                { metric: "95%", label: "Akurasi Model"},
+                { metric: "26", label: "Kelas Gestur"},
+                { metric: "Realtime", label: "Translation"}
+            ]
+        },
+        
+        // Process per project
+        process: [
+            { step: 1, title: "Data Collection", description: "Mengumpulkan ribuan gambar gestur SIBI" },
+            { step: 2, title: "Preprocessing", description: "Augmentasi dan normalisasi data" },
+            { step: 3, title: "Architecture Design", description: "Merancang arsitektur CNN optimal" },
+            { step: 4, title: "Training", description: "Melatih model dengan dataset" },
+            { step: 5, title: "Evaluation", description: "Evaluasi akurasi dan fine-tuning" },
+            { step: 6, title: "Deployment", description: "Export model untuk production" }
         ],
-        challenges: [
-            "Sistem terbatas pada pengenalan gestur alphabet (fingerspelling) SIBI, belum mendukung gestur leksikal yang merepresentasikan kata atau frasa lengkap.",
-            "Sistem belum mampu mendeteksi gestur dari tangan dengan kondisi anatomis yang tidak lengkap, seperti ketiadaan jari tertentu atau jari yang tidak sempurna."
-        ],
-        results: [
-            "Mencapai akurasi hingga 95% dalam mendeteksi gestur tangan",
-            "Jarak optimal penggunaan antara 15-30 cm dari kamera dengan kondisi pencahayaan yang memadai",
-            "Mendukung 26 karakter alphabet SIBI untuk komunikasi dasar"
-        ],
+        
         link: "#",
     },
     {
@@ -114,117 +158,83 @@ export const projectsData = [
             "/images/projects/E-commerce_analytic.png"
         ],
         technologies: ["Python", "Pandas", "NumPy", "Scikit-learn", "Power BI", "Tableau", "SQL"],
-        features: [
-            "Data Cleaning & Preprocessing",
-            "RFM Analysis & Customer Segmentation",
-            "Business Metrics (AOV, CLV, Retention Rate, Churn Rate)",
-            "K-Means Clustering",
-            "Market Basket Analysis",
-            "5 Interactive Dashboards"
+        
+        // Case Study (partial - project ongoing)
+        caseStudy: {
+            challenge: "Retail online UK memiliki data transaksi dalam jumlah besar namun belum dimanfaatkan secara optimal untuk pengambilan keputusan bisnis. Diperlukan analisis mendalam untuk memahami perilaku pelanggan dan meningkatkan strategi bisnis.",
+            approach: [
+                "Setup environment dan import dataset retail UK",
+                "Data cleaning: handling missing values, duplicates, dan outliers",
+                "Exploratory Data Analysis untuk memahami pola data",
+                "RFM Analysis untuk segmentasi pelanggan",
+                "Perhitungan business metrics (AOV, CLV, Retention Rate)",
+                "Visualisasi dengan Power BI dan Tableau"
+            ],
+            solution: "Project ini sedang dalam pengembangan. Output yang direncanakan adalah 5 dashboard interaktif yang menampilkan insights tentang customer segmentation, sales performance, dan business metrics.",
+            impact: [
+                { metric: "25%", label: "Progress" },
+                { metric: "5", label: "Dashboard Planned" },
+                { metric: "RFM", label: "Segmentation" }
+            ]
+        },
+        
+        // Process per project
+        process: [
+            { step: 1, title: "Setup", description: "Environment & library setup" },
+            { step: 2, title: "Data Loading", description: "Import dan eksplorasi awal data" },
+            { step: 3, title: "Data Cleaning", description: "Cleaning dan preprocessing" },
+            { step: 4, title: "EDA", description: "Exploratory Data Analysis" },
+            { step: 5, title: "Analysis", description: "RFM & Business Metrics" },
+            { step: 6, title: "Visualization", description: "Dashboard Power BI & Tableau" }
         ],
-        challenges: [],
-        results: [],
+        
         phases: [
             { 
                 id: 1, 
-                name: "Setup & Import", 
+                name: "Setup", 
                 status: "completed", 
-                description: "Setup environment & import libraries",
+                description: "Environment & library setup",
                 details: "Menyiapkan environment Python dengan Jupyter Notebook, menginstall dan mengimport library yang diperlukan seperti Pandas, NumPy, Matplotlib, Seaborn, dan Scikit-learn.",
-                documents: [
-                    { type: "pdf", url: "/docs/phase1.pdf", title: "Setup Environment & Import Libraries" }
-                ]
+                documents: []
             },
             { 
                 id: 2, 
                 name: "Data Loading", 
-                status: "completed", 
-                description: "Load data & eksplorasi awal",
+                status: "in-progress", 
+                description: "Import dan eksplorasi awal data",
                 details: "Memuat dataset retail online UK, melakukan eksplorasi awal untuk memahami struktur data, tipe data, dan statistik deskriptif dasar.",
-                documents: [
-                    { type: "pdf", url: "/docs/phase2.pdf", title: "Data Loading & Eksplorasi Awal" }
-                ]
+                documents: []
             },
             { 
                 id: 3, 
                 name: "Data Cleaning", 
-                status: "completed", 
-                description: "Cleaning, handle missing values, remove duplicates & outliers",
-                details: "Membersihkan data dengan menangani missing values menggunakan mean/median/modus, menghapus duplikat, mengidentifikasi dan menangani outliers, serta menyesuaikan tipe data.",
-                documents: [
-                    { type: "pdf", url: "/docs/phase3.pdf", title: "Data Cleaning" }
-                ]
+                status: "pending", 
+                description: "Cleaning dan preprocessing",
+                details: "Membersihkan data dengan menangani missing values, menghapus duplikat, mengidentifikasi dan menangani outliers, serta menyesuaikan tipe data.",
+                documents: []
             },
             { 
                 id: 4, 
-                name: "Exploratory Analysis", 
-                status: "in-progress", 
-                description: "Analisis deskriptif & performa penjualan",
-                details: "Melakukan analisis deskriptif mendalam dan menganalisis performa penjualan per kategori produk.",
+                name: "EDA", 
+                status: "pending", 
+                description: "Exploratory Data Analysis",
+                details: "Melakukan analisis deskriptif mendalam, menganalisis pola data, distribusi, korelasi, dan insight awal dari dataset.",
                 documents: []
             },
             { 
                 id: 5, 
-                name: "Business Analysis", 
+                name: "Analysis", 
                 status: "pending", 
-                description: "Segmentasi pelanggan, analisis geografis, time series",
-                details: "Analisis segmentasi pelanggan, analisis geografis penjualan, dan analisis time series untuk pola musiman.",
+                description: "RFM & Business Metrics",
+                details: "Menghitung RFM segmentation, AOV (Average Order Value), CLV (Customer Lifetime Value), Retention Rate, dan Churn Rate.",
                 documents: []
             },
             { 
                 id: 6, 
-                name: "RFM Analysis", 
+                name: "Visualization", 
                 status: "pending", 
-                description: "Recency, Frequency, Monetary segmentation",
-                details: "Perhitungan skor RFM dan segmentasi pelanggan berdasarkan perilaku pembelian.",
-                documents: []
-            },
-            { 
-                id: 7, 
-                name: "Business Metrics", 
-                status: "pending", 
-                description: "AOV, CLV, Retention Rate, Churn Rate",
-                details: "Menghitung metrik bisnis penting: Average Order Value, Customer Lifetime Value, Retention Rate dengan cohort analysis, dan Churn Rate.",
-                documents: []
-            },
-            { 
-                id: 8, 
-                name: "Data Modeling", 
-                status: "pending", 
-                description: "K-Means clustering, market basket analysis",
-                details: "Implementasi K-Means clustering untuk segmentasi dan market basket analysis untuk product affinity.",
-                documents: []
-            },
-            { 
-                id: 9, 
-                name: "Power BI Dashboard", 
-                status: "pending", 
-                description: "5 interactive dashboards",
-                details: "Membuat 5 dashboard interaktif di Power BI dengan DAX measures dan calculated fields.",
-                documents: []
-            },
-            { 
-                id: 10, 
-                name: "Tableau Dashboard", 
-                status: "pending", 
-                description: "5 interactive dashboards",
-                details: "Membuat 5 dashboard interaktif di Tableau dengan calculated fields dan parameters.",
-                documents: []
-            },
-            { 
-                id: 11, 
-                name: "Star Schema Export", 
-                status: "pending", 
-                description: "Export data dalam format star schema",
-                details: "Mengexport data dalam format star schema untuk optimasi query di BI tools.",
-                documents: []
-            },
-            { 
-                id: 12, 
-                name: "Documentation", 
-                status: "pending", 
-                description: "Final documentation & insights",
-                details: "Dokumentasi lengkap project termasuk metodologi, findings, dan actionable insights.",
+                description: "Dashboard Power BI & Tableau",
+                details: "Membuat 5 dashboard interaktif di Power BI dan Tableau untuk visualisasi customer segmentation, sales performance, dan business metrics.",
                 documents: []
             }
         ],
