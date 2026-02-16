@@ -180,7 +180,7 @@ const ProjectDocumentation = () => {
 
                     {/* Instructions */}
                     <p className="doc-animate text-sm text-stone-400 mb-4">
-                        💡 Klik pada setiap fase untuk melihat detail dan dokumentasi
+                        Klik pada setiap fase untuk melihat detail dan dokumentasi
                     </p>
                 </div>
             </div>
